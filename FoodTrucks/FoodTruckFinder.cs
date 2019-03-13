@@ -45,11 +45,16 @@ namespace FoodTrucks
                     count++;
                 }
 
-                Console.WriteLine("\nPlease press any key to see more food trucks that are open right now or ESCAPE to exit ...");
+                if (currentCursor < foodTrucks.Count)
+                {
+                    Console.WriteLine("\nPlease press any key to see more food trucks that are open right now or ESCAPE to exit ...");
+                }
+                else
+                {
+                    Console.WriteLine("\nDone. No more food trucks open for business can be found.");
+                }                
 
-            } while (currentCursor < foodTrucks.Count && Console.ReadKey().Key != ConsoleKey.Escape);
-
-            Console.WriteLine("Done. No more food trucks open for business can be found.");
+            } while (currentCursor < foodTrucks.Count && Console.ReadKey().Key != ConsoleKey.Escape);            
         }
     }
 }
