@@ -3,12 +3,13 @@
     1. Install .NET Core 2.2 Runtime on Linux Ubuntu 18.04 x64 | .NET: 
 		Go to this link and follow the instructions on how to install runtime to run the application 
 		(https://dotnet.microsoft.com/download/linux-package-manager/ubuntu18-04/runtime-2.2.3)
-		P.S You can choose another Linux distribution if necessary    	
+		P.S: You can choose another Linux distribution if necessary    	
     
     2. In unzipped folder, navigate to cd SanFranciscoFoodTrucks/FoodTrucks directory (where .csproj file lives)
     3. Run the application
 		Type dotnet run 
-		
+	
+	P.S: Project uses Newtonsoft.Json library to deserialize JSON objects
 		
 	##### Web Application Design
 	If this were to be a full scale web application, whose purpose is to display the food trucks in SF open at a given time
