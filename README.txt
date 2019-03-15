@@ -11,13 +11,26 @@
 
 P.S: Project uses Newtonsoft.Json library to deserialize JSON objects
 	
-##### Web Application Design
-I have attached an image of a web application structure for reference.
-Client makes request through web browser, then request gets routed to the web server by the load balancer.
-Web servers host the website and run a background service to pull data from the San Francisco government API.
-Given that food truck data is not expected to change every second, it is fine to have the background service
-pull data once a minute.
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+
+I have attached an image of a web application structure for reference ( WebApplicationDiagram.png ).
+
+##### Overall Data Flow and System Design
+User makes a request through web browser, then request gets routed to the backend web server by the load balancer, 
+and web server serves user's request and sends information back to user.
+Web server hosts the web application and runs a background job to pull data from the San Francisco government API and save data in the local cache.
 
 ##### Other Considerations
-Load balancer will reduce latency experienced by the end user.
-Multiple web servers will give us a more redundant system that will reduce downtime in case one of the links fails.
+Number of trucks in San Francisco is not on the order of millions or even 100,000 thus having full data replica on 
+each backend server should be an acceptable approach in this case.
+
+Given that food truck is not expected to change location very often (every second), it is fine to have the background service pull data once a minute.
+
+By the nature of the FoodTrack application, we expect that 95% of load is going to happen between 9 AM and 1 PM.
+A group of backend servers and load balancer are introduced in the proposed design, to address peak load and efficiently distribute incoming network traffic across backend servers.
+Load balancer performs following functions:
+   * Distributes client requests (network load) efficiently across multiple servers
+   * Ensures high availability and reliability by sending requests only to servers that are online
+   * Provides the flexibility to add or subtract servers as demand dictates without affecting the application users
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
